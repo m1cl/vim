@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Lokaltog/powerline'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -391,6 +391,12 @@ map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => airline-ctrlp config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
