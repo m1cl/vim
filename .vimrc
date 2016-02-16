@@ -8,6 +8,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
+Plugin 'tpope/vim-ragtag'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Lokaltog/powerline'
@@ -16,17 +17,28 @@ Plugin 'vim-airline/vim-airline'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'ryanoasis/vim-devicons'
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
+Plugin 'Townk/vim-autoclose'
+Plugin 'vim-scripts/closetag.vim'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'raimondi/delimitmate'
+Plugin 'Shougo/neossh.vim'
+Plugin 'sudo.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'jaxbot/browserlink.vim'
+Plugin 'justincampbell/vim-eighties'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -48,8 +60,10 @@ syntax on
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Powerline Settings "
-let g:airline_powerline_fonts = 2
+let g:airline_powerline_fonts = 1
 let g:Powerline_symbols = 'fancy'
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar Settings " 
 let g:tagbar_width=25
@@ -100,7 +114,7 @@ set nowrap
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=700
-
+autocmd BufEnter * lcd %:p:h
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -119,6 +133,7 @@ nmap <leader>w :w!<cr>
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -364,6 +379,11 @@ map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => delimitMate config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let delimitMate_expand_cr = 1
+filetype indent plugin on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -377,7 +397,10 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Nerdtree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeShowBookmarks=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -390,13 +413,23 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => airline
+" => close-tag
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ragtag_global_maps = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme = 'bubblegum'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ctag conf 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tags=./tags;
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => airline-ctrlp config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -405,6 +438,8 @@ let g:ctrlp_map = '<c-b>'
 
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
+let g:ctrlp_working_path_mode = 'c'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
