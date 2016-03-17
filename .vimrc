@@ -39,6 +39,22 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'jaxbot/browserlink.vim'
 Plugin 'justincampbell/vim-eighties'
+Plugin 'joonty/vim-phpunitqf'
+Plugin 'ain/vim-bower'
+Plugin 'bpearson/vim-phpcs'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'php-annotations-syntax'
+Plugin 'honza/vim-snippets'
+Plugin 'garbas/vim-snipmate'
+Plugin 'SirVer/ultisnips'
+Plugin 'scrooloose/syntastic'
+Plugin 'joonty/vdebug'
+Plugin 'ddollar/nerdcommenter'
+Plugin 'sumpygump/php-documentor-vim'
+Plugin 'docteurklein/php-getter-setter.vim'
+
+" assuming you want to use snipmate snippet engine
+ActivateAddons vim-snippets snipmate
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -65,8 +81,18 @@ let g:Powerline_symbols = 'fancy'
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar Settings " 
-let g:tagbar_width=25
+let g:tagbar_width=5
 " Maintainer: 
 "       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
@@ -107,7 +133,11 @@ set nowrap
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" =>         php - Documentor
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.php inoremap <buffer> <C-P> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.php nnoremap <buffer> <C-P> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.php vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -196,8 +226,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme desert
-set background=dark
+colorscheme elflord
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -437,8 +466,9 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map = '<c-b>'
 
 let g:ctrlp_cmd = 'CtrlP'
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
-let g:ctrlp_working_path_mode = 'c'
+let g:ctrlp_working_path_mode = 'rc'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
